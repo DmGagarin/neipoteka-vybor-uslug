@@ -374,6 +374,7 @@ button { border: 0; cursor: pointer; }
 .fee-hint__rate { width: calc((100% - 8px) / 2); min-height: 106px; padding: 12px; display: flex; flex: 1 0 0; flex-direction: column; align-items: flex-start; gap: 12px; background: #f4f5f6; border-radius: 12px; }
 .fee-hint__rate > span { min-height: 32px; display: block; color: #738295; font-size: 12px; line-height: 16px; font-weight: 500; letter-spacing: -0.12px; }
 .fee-hint__rate > strong { color: #262626; font-family: "SB Sans Display", Arial, sans-serif; font-size: 18px; line-height: 24px; font-weight: 600; letter-spacing: 0; }
+.fee-hint__rate:first-child > strong { transform: translateY(24px); }
 .fee-hint__rate > strong small { display: block; color: #738295; font-family: "SB Sans Text", Arial, sans-serif; font-size: 12px; line-height: 16px; font-weight: 500; letter-spacing: -0.12px; }
 .fee-hint__alert { width: 100%; padding: 12px; display: flex; align-items: flex-start; gap: 8px; background: #edf4ff; border-radius: 8px; }
 .fee-hint__alert img { width: 16px; height: 16px; flex: 0 0 16px; margin-top: 2px; }
