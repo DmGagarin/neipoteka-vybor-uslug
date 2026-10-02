@@ -1,6 +1,10 @@
-<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <circle cx="8" cy="8" r="7" stroke="#1175DA" stroke-width="1.5"/>
-  <path d="M6.45 6.25C6.62 5.2 7.25 4.55 8.2 4.55C9.28 4.55 10 5.25 10 6.2C10 6.95 9.63 7.4 8.9 7.92C8.17 8.43 7.85 8.88 7.85 9.65" stroke="#1175DA" stroke-width="1.5" stroke-linecap="round"/>
-  <circle cx="7.85" cy="11.45" r="0.75" fill="#1175DA"/>
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Information-filled" clip-path="url(#clip0_0_1025)">
+<path id="vector-icon" fill-rule="evenodd" clip-rule="evenodd" d="M8 0.5C3.85786 0.5 0.5 3.85786 0.5 8C0.5 12.1421 3.85786 15.5 8 15.5C12.1421 15.5 15.5 12.1421 15.5 8C15.5 3.85786 12.1421 0.5 8 0.5ZM8.83333 11.3333C8.83333 11.7936 8.46024 12.1667 8 12.1667C7.53976 12.1667 7.16667 11.7936 7.16667 11.3333V7.16667C7.16667 6.70643 7.53976 6.33333 8 6.33333C8.46024 6.33333 8.83333 6.70643 8.83333 7.16667V11.3333ZM8.83333 4.66667C8.83333 5.1269 8.46024 5.5 8 5.5C7.53976 5.5 7.16667 5.1269 7.16667 4.66667C7.16667 4.20643 7.53976 3.83333 8 3.83333C8.46024 3.83333 8.83333 4.20643 8.83333 4.66667Z" fill="#1175DA"/>
+</g>
+<defs>
+<clipPath id="clip0_0_1025">
+<rect width="16" height="16" fill="white"/>
+</clipPath>
+</defs>
 </svg>
-
