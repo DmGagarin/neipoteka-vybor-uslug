@@ -156,27 +156,33 @@
           </div>
         </div>
       </main>
-      <div class="fee-hint" id="fee-hint" data-fee-hint hidden role="dialog" aria-labelledby="fee-hint-title">
+      <div class="fee-hint" id="fee-hint" data-fee-hint hidden role="dialog" aria-modal="true" aria-labelledby="fee-hint-title">
         <div class="fee-hint__surface">
-          <div class="fee-hint__content">
+          <div class="fee-hint__top">
             <div class="fee-hint__intro">
               <h2 id="fee-hint-title">Размер госпошлины</h2>
-              <p>Зависит от&nbsp;кадастровой стоимости недвижимости или&nbsp;доли в праве общей долевой собственности</p>
+              <p>Зависит от&nbsp;кадастровой стоимости недвижимости</p>
             </div>
-            <div class="fee-hint__body">
-            <div class="fee-hint__details">
-              <div class="fee-hint__rates">
-                <div class="fee-hint__rate"><span>Кадастровая стоимость меньше 20 млн ₽</span><strong>4 000 ₽</strong></div>
-                <div class="fee-hint__rate"><span>Кадастровая стоимость больше 20 млн ₽</span><strong>0,02% от&nbsp;неё, но не более 500 тыс. ₽</strong></div>
+          </div>
+          <div class="fee-hint__body">
+            <div class="fee-hint__rates">
+              <div class="fee-hint__rate">
+                <span>Кадастровая стоимость до 20 млн ₽</span>
+                <strong>4 000 ₽</strong>
               </div>
-              <a class="fee-hint__link" href="https://blog.domclick.ru/nedvizhimost/post/gosposhlina-za-registraciyu-prava-sobstvennosti-chto-nuzhno-znat" target="_blank" rel="noreferrer">Подробнее в статье</a>
+              <div class="fee-hint__rate">
+                <span>Кадастровая стоимость свыше<br />20 млн ₽</span>
+                <strong>0,02% от неё,<small>но не более 500 тыс. ₽</small></strong>
+              </div>
             </div>
             <div class="fee-hint__alert"><img src="/src/assets/duty-info-alert.svg" alt="" /><p>Точный размер госпошлины будет известен перед оплатой</p></div>
-            </div>
+          </div>
+          <div class="fee-hint__actions">
+            <a class="button button--secondary fee-hint__details" href="https://blog.domclick.ru/nedvizhimost/post/gosposhlina-za-registraciyu-prava-sobstvennosti-chto-nuzhno-znat" target="_blank" rel="noreferrer">Узнать подробнее</a>
+            <button class="button button--primary fee-hint__ok" type="button" data-fee-hint-ok>Понятно</button>
           </div>
           <button class="fee-hint__close" type="button" data-fee-hint-close aria-label="Закрыть"><img src="/src/assets/duty-hint-close.svg" alt="" /></button>
         </div>
-        <span class="fee-hint__arrow" aria-hidden="true"><img src="/src/assets/duty-hint-arrow.svg" alt="" /></span>
       </div>
     </div>
 
