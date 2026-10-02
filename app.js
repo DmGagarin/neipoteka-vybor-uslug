@@ -31,6 +31,9 @@ const promoModalAccept = promoModalOverlay?.querySelector('[data-promo-accept]')
 const promoFeeSwitch = promoModalOverlay?.querySelector('[data-promo-fee-switch]');
 const promoPriceLabel = promoModalOverlay?.querySelector('[data-promo-price-label]');
 const promoPrice = promoModalOverlay?.querySelector('[data-promo-price]');
+const promoUpInfoTrigger = promoModalOverlay?.querySelector('[data-promo-up-info-trigger]');
+const promoUpHint = promoModalOverlay?.querySelector('[data-promo-up-hint]');
+const promoUpHintClose = promoUpHint?.querySelector('.promo-up-hint__close');
 const registrationCard = document.querySelector('[data-service="registration"]');
 const creditCard = document.querySelector('[data-service="credit"]');
 
@@ -279,6 +282,7 @@ function shouldOfferRegistration() {
 
 function closePromoModal() {
   if (!promoModalOverlay) return;
+  closePromoUpHint();
   promoModalOverlay.hidden = true;
   document.body.classList.remove('modal-open');
 }
@@ -290,6 +294,7 @@ function updatePromoPrice() {
 }
 
 function resetPromoPrice() {
+  closePromoUpHint();
   promoFeeSwitch?.setAttribute('aria-pressed', 'false');
   promoFeeSwitch?.classList.remove('switch--on');
   if (promoPriceLabel) promoPriceLabel.textContent = 'Цена услуги';
@@ -347,6 +352,30 @@ continueButton?.addEventListener('click', () => {
 });
 
 promoModalClose?.addEventListener('click', closePromoModal);
+function closePromoUpHint(restoreFocus = false) {
+  if (!promoUpHint) return;
+  promoUpHint.hidden = true;
+  promoUpInfoTrigger?.setAttribute('aria-expanded', 'false');
+  if (restoreFocus) promoUpInfoTrigger?.focus();
+}
+
+promoUpInfoTrigger?.addEventListener('click', (event) => {
+  event.preventDefault();
+  event.stopPropagation();
+  const isOpen = !promoUpHint.hidden;
+  if (isOpen) {
+    closePromoUpHint();
+    return;
+  }
+
+  promoUpHint.hidden = false;
+  promoUpInfoTrigger.setAttribute('aria-expanded', 'true');
+  promoUpHintClose?.focus();
+});
+promoUpHintClose?.addEventListener('click', (event) => {
+  event.stopPropagation();
+  closePromoUpHint(true);
+});
 promoFeeSwitch?.addEventListener('click', (event) => {
   event.stopPropagation();
   const pressed = promoFeeSwitch.getAttribute('aria-pressed') === 'true';
@@ -449,6 +478,7 @@ document.addEventListener('keydown', (event) => {
   if (event.key === 'Escape' && modalOverlay && !modalOverlay.hidden) closeModal();
   if (event.key === 'Escape' && promoModalOverlay && !promoModalOverlay.hidden) closePromoModal();
   if (event.key === 'Escape' && upHint && !upHint.hidden) closeUpHint();
+  if (event.key === 'Escape' && promoUpHint && !promoUpHint.hidden) closePromoUpHint(true);
   if (event.key === 'Escape' && feeHint && !feeHint.hidden) closeFeeHint(true);
 });
 
@@ -471,6 +501,7 @@ upInfoTrigger?.addEventListener('click', (event) => {
 upHintClose?.addEventListener('click', closeUpHint);
 document.addEventListener('click', (event) => {
   if (upHint && !upHint.hidden && !upHint.contains(event.target) && event.target !== upInfoTrigger) closeUpHint();
+  if (promoUpHint && !promoUpHint.hidden && !promoUpHint.contains(event.target) && event.target !== promoUpInfoTrigger) closePromoUpHint();
   if (feeHint && !feeHint.hidden && !feeHint.contains(event.target) && event.target !== feeHintTrigger) closeFeeHint();
 });
 
