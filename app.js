@@ -22,6 +22,7 @@ const upHintClose = upHint?.querySelector('.up-hint__close');
 const feeHint = document.querySelector('[data-fee-hint]');
 const feeHintTrigger = document.querySelector('[data-fee-hint-trigger]');
 const feeHintClose = feeHint?.querySelector('[data-fee-hint-close]');
+const feeHintOk = feeHint?.querySelector('[data-fee-hint-ok]');
 const switchButton = document.querySelector('.switch');
 const continueButton = document.querySelector('[data-continue]');
 const promoModalOverlay = document.querySelector('[data-promo-modal-overlay]');
@@ -396,47 +397,10 @@ promoModalOverlay?.addEventListener('click', (event) => {
   if (event.target === promoModalOverlay) closePromoModal();
 });
 
-function positionFeeHint() {
-  if (!feeHint || feeHint.hidden || !feeHintTrigger) return;
-
-  const triggerRect = feeHintTrigger.getBoundingClientRect();
-  const iconRect = feeHintTrigger.querySelector('img')?.getBoundingClientRect() || triggerRect;
-  const viewportPadding = 16;
-  const gap = 4;
-  const width = Math.min(380, window.innerWidth - viewportPadding * 2);
-  feeHint.style.width = `${width}px`;
-  feeHint.style.left = '0px';
-  feeHint.style.top = '0px';
-
-  const surface = feeHint.querySelector('.fee-hint__surface');
-  if (!surface) return;
-  surface.style.maxHeight = `min(480px, calc(100vh - ${viewportPadding * 2}px))`;
-  const panelHeight = surface.getBoundingClientRect().height;
-  const fullHeight = panelHeight + 8;
-  const spaceAbove = triggerRect.top - viewportPadding;
-  const spaceBelow = window.innerHeight - triggerRect.bottom - viewportPadding;
-  const placement = fullHeight + gap <= spaceAbove ? 'top' : 'bottom';
-
-  feeHint.dataset.placement = placement;
-  if (placement === 'top') {
-    feeHint.style.top = `${triggerRect.top - fullHeight - gap}px`;
-  } else {
-    surface.style.maxHeight = `${Math.max(160, Math.min(480, spaceBelow - gap - 8))}px`;
-    feeHint.style.top = `${triggerRect.bottom + gap + 8}px`;
-  }
-
-  const actualWidth = feeHint.getBoundingClientRect().width;
-  const left = Math.max(viewportPadding, Math.min(
-    window.innerWidth - actualWidth - viewportPadding,
-    triggerRect.right - actualWidth
-  ));
-  feeHint.style.left = `${left}px`;
-  feeHint.style.setProperty('--fee-hint-arrow-left', `${iconRect.left + iconRect.width / 2 - left}px`);
-}
-
 function closeFeeHint(restoreFocus = false) {
   if (!feeHint || feeHint.hidden) return;
   feeHint.hidden = true;
+  document.body.classList.remove('modal-open');
   feeHintTrigger?.setAttribute('aria-expanded', 'false');
   if (restoreFocus) feeHintTrigger?.focus();
 }
@@ -444,8 +408,8 @@ function closeFeeHint(restoreFocus = false) {
 function openFeeHint() {
   if (!feeHint || !feeHintTrigger) return;
   feeHint.hidden = false;
+  document.body.classList.add('modal-open');
   feeHintTrigger.setAttribute('aria-expanded', 'true');
-  positionFeeHint();
   feeHintClose?.focus();
 }
 
@@ -466,8 +430,10 @@ feeHintClose?.addEventListener('click', (event) => {
   event.stopPropagation();
   closeFeeHint(true);
 });
-window.addEventListener('resize', positionFeeHint);
-document.addEventListener('scroll', positionFeeHint, true);
+feeHintOk?.addEventListener('click', () => closeFeeHint(true));
+feeHint?.addEventListener('click', (event) => {
+  if (event.target === feeHint) closeFeeHint(true);
+});
 
 modalClose?.addEventListener('click', closeModal);
 modalOk?.addEventListener('click', closeModal);
